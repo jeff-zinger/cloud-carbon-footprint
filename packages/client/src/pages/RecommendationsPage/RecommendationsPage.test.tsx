@@ -113,6 +113,43 @@ describe('Recommendations Page', () => {
     expect(recommendationDetail).toBeInTheDocument()
   })
 
+  it('hides and re-displays the side panel when a recommendation row is clicked multiple times', () => {
+    const { getByText, queryByTestId } = render(<RecommendationsPage />)
+
+    fireEvent.click(screen.getByText('test-a'))
+    fireEvent.click(screen.getByText('test-a', { selector: 'div' }))
+    // selector added because now there are multiple elements with the text 'test-a' on the screen
+
+    expect(queryByTestId('sideBarTitle')).toBeFalsy()
+
+    fireEvent.click(screen.getByText('test-a'))
+    const recommendationDetail = getByText(
+      mockRecommendationData[0].recommendationDetail,
+    )
+
+    expect(queryByTestId('sideBarTitle')).toBeInTheDocument()
+    expect(recommendationDetail).toBeInTheDocument()
+  })
+
+  it('displays a new recommendation in the side panel when its recommendation row is clicked', () => {
+    const { getByText, queryByText, queryByTestId } = render(
+      <RecommendationsPage />,
+    )
+
+    fireEvent.click(screen.getByText('test-a'))
+    fireEvent.click(screen.getByText('test-b'))
+    const firstRecommendationDetail = queryByText(
+      mockRecommendationData[0].recommendationDetail,
+    )
+    const secondRecommendationDetail = getByText(
+      mockRecommendationData[1].recommendationDetail,
+    )
+
+    expect(queryByTestId('sideBarTitle')).toBeInTheDocument()
+    expect(firstRecommendationDetail).toBeFalsy()
+    expect(secondRecommendationDetail).toBeInTheDocument()
+  })
+
   it('should render a filter bar on the page', () => {
     const { getByTestId } = render(<RecommendationsPage />)
 
