@@ -1,5 +1,17 @@
 # @cloud-carbon-footprint/azure
 
+## 1.0.0
+
+### Major Changes
+
+- a1ad994d: Updates Azure SDK and usageRow pagination to latest version (v9)
+
+  For updates to create-app (CLI) templates, please review this [commit.](https://github.com/cloud-carbon-footprint/cloud-carbon-footprint/commit/6e943bc74851b093d372b14ccb38981053e36bf5)
+
+### Minor Changes
+
+- 692d6aaf: implements advisor recommendations for azure package
+
 ## 0.12.0
 
 ### Minor Changes
